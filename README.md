@@ -5,9 +5,11 @@ I am a highly driven Secure Infrastructure Administrator (ISO 27001 certified) w
 My background includes roles as a DevOps System Administrator and IAM consultant, demonstrating a dual focus on operational efficiency (Kubernetes, CI/CD, IaC) and security compliance.
 I pride myself on my analytical mind, adaptability, and commitment to collaborative problem-solving.
 
+
 ## Objective
 
 To leverage my comprehensive expertise in secure infrastructure administration, DevOps automation, aiming for a challenging role that prioritizes both system performance and stringent ISO 27001 compliance and continuous security improvement.
+
 
 ## Skills
 
@@ -20,7 +22,9 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 | DevOps & Containerization                     | SOC Automation Lab|
 | Scripting and Automation for Threat Mitigation | SOC Automation Lab|
 
+
 ## Tools
+
 
 ### Cloud & Collaboration
 <div>
@@ -87,8 +91,8 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
     <img src="https://img.shields.io/badge/Zabbix-CC0000?style=for-the-badge&logo=zabbix&logoColor=white" />
 </div>
 
+
 ## Certifications
-[Provide certifications that you have obtained. Use ChatGPT to help create the link - Remove this afterwards]]
 <div>
 <img src="https://img.shields.io/badge/-Security%2B-FF0000?&style=for-the-badge&logo=CompTIA&logoColor=white" />
 <img src="https://img.shields.io/badge/-Network%2B-007ACC?&style=for-the-badge&logo=CompTIA&logoColor=white" />
@@ -96,6 +100,7 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 <img src="https://img.shields.io/badge/-CDSA-006400?&style=for-the-badge&logoColor=white" />
 <img src="https://img.shields.io/badge/-CCD-000080?&style=for-the-badge&logoColor=white" />
 </div>
+
 
 ## Projects
 - Detection Lab
