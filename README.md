@@ -1,4 +1,4 @@
-# LAB : Sauvegarde de VMs avec Veeam Backup & Replication
+# 04-LAB : Sauvegarde de VMs avec Veeam Backup & Replication
 
 Ce laboratoire détaille la mise en place d'une solution de sauvegarde et de restauration pour un environnement virtualisé. En utilisant **Veeam Backup & Replication Community Edition**, nous allons configurer la protection des deux machines virtuelles critiques de notre infrastructure : le contrôleur de domaine Windows (`par-dc-win01`) et le serveur GLPI sous Debian (`par-glpi-01`).
 
