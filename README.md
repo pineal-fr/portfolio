@@ -1,65 +1,83 @@
-# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
+# LAB : Audit de Vulnérabilités Web avec OWASP ZAP
 
-Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
+Ce laboratoire décrit la procédure pour réaliser un audit de sécurité sur une application web, en l'occurrence le serveur GLPI précédemment installé. Nous utiliserons pour cela l'outil OWASP ZAP (ZAPROXY) depuis une machine virtuelle Kali Linux afin d'identifier, d'évaluer et de proposer des solutions aux vulnérabilités découvertes.
 
-L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
+Les étapes clés incluent :
 
-## 🏗️ Structure du Projet
+  * La préparation d'un environnement d'audit sécurisé sur `Kali Linux`.
+  * La création d'un utilisateur dédié `(pinealadmin)` pour les opérations.
+  * L'installation et la configuration de l'outil d'analyse de vulnérabilités **OWASP ZAP**.
+  * L'exécution de scans passifs et actifs (Spider, AJAX Spider, Active Scan) contre le serveur GLPI.
+  * L'analyse des alertes de sécurité générées par l'outil.
+  * La création d'un rapport synthétisant les failles et la formulation d'un **plan de remédiation**.
 
-Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
+<img width="860" height="277" alt="image" src="https://github.com/user-attachments/assets/18096f92-559e-4b72-a705-afd7be9ad4b7" />
 
-Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
 
-## 🔬 Arborescence des Laboratoires
+## 🎯 Objectif
 
-Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
+L'objectif de ce laboratoire est de mener un audit de sécurité de type "boîte grise" sur l'application web GLPI. Il s'agit de détecter les vulnérabilités potentielles, d'évaluer leur niveau de criticité, et de rédiger des préconisations techniques claires pour renforcer la sécurité du serveur web.
 
----
+## 🛠️ Prérequis
 
-### 1. 📦 Installation d'un serveur ITSM sur Debian
-* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
-* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
+  * Hyperviseur (VMware Workstation, VirtualBox, etc.).
+  * Machine virtuelle Kali Linux (image disponible sur [le site officiel de Kali](https://www.kali.org/get-kali/#kali-virtual-machines)).
+  * Le serveur GLPI du LAB 1 doit être fonctionnel et accessible sur le réseau.
 
----
+## ⚙️ Démarche de l'Audit
 
-### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
-* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
-* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
+### 1\. Préparation de l'environnement Kali Linux
 
----
+Une machine virtuelle Kali Linux est déployée. Les premières étapes consistent à sécuriser l'environnement de travail.
 
-### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
-* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
-* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
+  * **a. Création d'un utilisateur non-root**
+    ```bash
+    sudo adduser pinealadmin
+    ```
+  * **b. Ajout de l'utilisateur au groupe sudo**
+    ```bash
+    sudo usermod -aG sudo pinealadmin
+    ```
+  * **c. Mise à jour du système**
+    ```bash
+    sudo apt update && sudo apt upgrade -y
+    ```
 
----
+### 2\. Installation et Lancement de ZAPROXY
 
-### 4. 💾 Stratégie de Sauvegarde avec Veeam
-* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
-* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
+OWASP ZAP est installé via le gestionnaire de paquets `apt`.
 
----
+  * **a. Installation de ZAPROXY**
+    ```bash
+    sudo apt install zaproxy
+    ```
+  * **b. Lancement de l'application**
+    ```bash
+    owasp-zap
+    ```
+    Au premier lancement, il est demandé de configurer la persistance de la session.
 
-### 5. 🔄 Haute Disponibilité du Routage avec HSRP
-* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
-* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
+### 3\. Exploration et Scan du site GLPI
 
----
+L'audit se déroule en plusieurs phases pour découvrir et attaquer l'application.
 
-### 6. 📊 Supervision d'Infrastructure avec Zabbix
-* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
-* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
+  * **a. Exploration Manuelle et Spidering**
+    L'exploration manuelle est lancée en ciblant l'URL du serveur GLPI (`http://192.168.1.22/glpi`). Ensuite, des scans **Spider** et **AJAX Spider** sont exécutés pour découvrir l'arborescence complète du site et les points d'entrée potentiels.
 
----
+  * **b. Scan Actif (Attaque)**
+    Un scan actif est lancé sur le site découvert. ZAP envoie une série de charges utiles pour tester activement les vulnérabilités connues (injections SQL, XSS, etc.). Cette étape peut être longue.
 
-### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
-* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
-* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+### 4\. Analyse des Résultats et Plan de Remédiation
 
----
+Les vulnérabilités trouvées sont listées dans l'onglet **"Alertes"**.
+Un rapport est ensuite généré pour analyse, nous pouvons le placer au format HTML en cliquant sur l'onglet `Report` puis `Generate Report`.
 
-### 8. 📡 Automatisation de la Veille en Cybersécurité
-* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
-* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+**Vulnérabilités Moyennes identifiées et plan de remédiation :**
 
----
+| Vulnérabilité (Alerte ZAP) | Criticité | Risque Associé | Préconisation Technique / Solution |
+| :--- | :--- | :--- | :--- |
+| **Content Security Policy (CSP) Header Not Set** | Moyenne | Augmente le risque d'attaques par injection de script (XSS) car le navigateur n'a aucune instruction sur les sources de contenu légitimes. | Ajouter un en-tête HTTP `Content-Security-Policy` strict dans la configuration Apache, par exemple : `Header set Content-Security-Policy "default-src 'self';"` |
+| **Missing Anti-clickjacking Header** | Moyenne | Permet des attaques de type "Clickjacking", où un attaquant intègre GLPI dans une `<iframe>` sur une page malveillante pour tromper l'utilisateur. | Ajouter l'en-tête `X-Frame-Options` dans la configuration Apache pour interdire l'affichage du site dans une frame externe : `Header always set X-Frame-Options "SAMEORIGIN"` |
+| **Application Error Disclosure** | Moyenne | Un message d'erreur peut divulguer des informations techniques sensibles (ex: chemin d'un fichier sur le serveur), qui peuvent être utilisées pour affiner d'autres attaques. | Mettre en place des pages d'erreur personnalisées et génériques dans la configuration Apache qui ne divulguent aucune information interne. |
+
+✅ **L'audit de sécurité a été réalisé et un plan de remédiation a été établi pour corriger les vulnérabilités identifiées.**
