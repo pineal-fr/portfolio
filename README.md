@@ -1,4 +1,4 @@
-# LAB : Segmentation Réseau avec VLAN, VTP et LACP sur Cisco
+# 02-LAB : Segmentation Réseau avec VLAN, VTP et LACP sur Cisco
 
 Ce laboratoire détaille les étapes pour configurer deux commutateurs Cisco afin de segmenter un réseau d'entreprise.
 Il couvre la création de réseaux locaux virtuels (VLANs), leur synchronisation automatique via le protocole VTP (VLAN Trunking Protocol), la mise en place d'une agrégation de liens redondante avec LACP (Link Aggregation Control Protocol) et la sécurisation de l'administration des équipements.
