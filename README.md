@@ -1,4 +1,4 @@
-# LAB : Installation et Configuration de GLPI sur Debian 13
+# 01-LAB : Installation et Configuration de GLPI sur Debian 13
 
 Ce laboratoire détaille les étapes pour installer et configurer un serveur de gestion de parc informatique (ITSM) GLPI sur une machine virtuelle Debian 13.
 Il couvre non seulement le déploiement de la solution, mais aussi les bonnes pratiques de sécurité fondamentales, telles que la création d'utilisateurs dédiés et la sécurisation des accès.
