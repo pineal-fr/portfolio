@@ -1,4 +1,4 @@
-# LAB : Déploiement d'Active Directory et DHCP sur Windows Server
+# 03-LAB : Déploiement d'Active Directory et DHCP sur Windows Server
 
 Ce laboratoire détaille la mise en place des services centraux d'une infrastructure Microsoft : l'annuaire **Active Directory Domain Services (AD DS)** pour la gestion des identités et le service **DHCP** pour l'attribution automatique des adresses IP. L'ensemble est déployé sur un serveur **Windows Server 2022**.
 
