@@ -1,65 +1,93 @@
-# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
+# LAB : Sauvegarde de VMs avec Veeam Backup & Replication
 
-Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
+Ce laboratoire détaille la mise en place d'une solution de sauvegarde et de restauration pour un environnement virtualisé. En utilisant **Veeam Backup & Replication Community Edition**, nous allons configurer la protection des deux machines virtuelles critiques de notre infrastructure : le contrôleur de domaine Windows (`par-dc-win01`) et le serveur GLPI sous Debian (`par-glpi-01`).
 
-L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
+Les étapes clés incluent :
 
-## 🏗️ Structure du Projet
+* L'installation de la console **Veeam B&R** sur le serveur Windows.
+* La configuration d'un **dépôt de sauvegarde local** (Repository) pour stocker les backups.
+* La création d'un **groupe de protection** pour gérer et déployer automatiquement les agents Veeam.
+* Le déploiement des **agents de sauvegarde** sur les machines Windows et Debian.
+* La création et la planification d'un **job de sauvegarde** pour automatiser le processus.
+* La réalisation d'un **test de restauration** au niveau fichier pour valider l'intégrité des sauvegardes.
 
-Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
+## 🎯 Objectif
 
-Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
+L'objectif est d'établir une stratégie de sauvegarde fiable et automatisée pour les serveurs critiques. Cela garantit la capacité de restaurer des données ou des systèmes complets en cas d'incident (panne matérielle, cyberattaque, erreur humaine), assurant ainsi la continuité de l'activité.
 
-## 🔬 Arborescence des Laboratoires
+<img width="750" height="422" alt="image" src="https://github.com/user-attachments/assets/c072cd1b-c35c-4b70-97fd-c4f0cb404183" />
 
-Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
----
+## 🛠️ Prérequis
 
-### 1. 📦 Installation d'un serveur ITSM sur Debian
-* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
-* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
+* Le serveur Active Directory (`par-dc-win01`) doit être fonctionnel. C'est sur cette machine que Veeam B&R sera installé.
+* Le serveur GLPI (`par-glpi-01`) doit être fonctionnel.
+* L'installeur ISO de **Veeam Backup & Replication Community Edition**.
+* Des informations d'identification avec des droits administratifs sur les deux serveurs cibles.
 
----
+## ⚙️ Étapes d'installation et de configuration
 
-### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
-* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
-* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
+### 1. Préparation et Installation de Veeam
 
----
+Après avoir téléchargé l'ISO, l'installation de Veeam B&R est lancée sur le serveur `par-dc-win01`. Un dossier local est également créé à la racine du disque pour accueillir les sauvegardes.
+* **Dossier de sauvegarde :** `C:\_VeeamBackups`
 
-### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
-* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
-* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
+### 2. Configuration du Dépôt de Sauvegarde (Repository)
 
----
+Il s'agit de déclarer à Veeam où stocker les fichiers de sauvegarde.
 
-### 4. 💾 Stratégie de Sauvegarde avec Veeam
-* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
-* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
+* **a. Lancement de l'assistant**
+    Dans la console Veeam, naviguez vers **Backup Infrastructure**, faites un clic droit sur **Backup Repositories** et sélectionnez `Add backup repository...`.
 
----
+* **b. Configuration**
+    * **Type :** `Direct attached storage` > `Microsoft Windows`.
+    * **Nom :** `Backup local`.
+    * **Chemin :** Parcourir et sélectionner le dossier `C:\_VeeamBackups`.
+    * Suivre l'assistant jusqu'à la fin pour valider la création.
 
-### 5. 🔄 Haute Disponibilité du Routage avec HSRP
-* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
-* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
+### 3. Création du Groupe de Protection
 
----
+Ce groupe permet de gérer le déploiement des agents Veeam sur les machines à protéger.
 
-### 6. 📊 Supervision d'Infrastructure avec Zabbix
-* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
-* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
+* **a. Lancement de l'assistant**
+    Naviguez vers **Inventory**, faites un clic droit sur **Physical Infrastructure** et sélectionnez `Create protection group`.
 
----
+* **b. Configuration**
+    * **Nom :** `Serveurs Critiques PINEAL`.
+    * **Type :** `Servers`.
+    * **Computers :** Ajoutez les deux serveurs via leurs adresses IP (`192.168.1.10` pour Windows et `192.168.1.22` pour Debian) en fournissant les informations d'identification administratives requises (compte de domaine pour Windows, compte `pinealadmin` pour Debian/SSH).
+    * Veeam se connectera alors à chaque machine pour y déployer l'agent de sauvegarde.
 
-### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
-* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
-* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+### 4. Création du Job de Sauvegarde
 
----
+Le "job" est la tâche qui exécute la sauvegarde selon les paramètres définis.
 
-### 8. 📡 Automatisation de la Veille en Cybersécurité
-* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
-* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+* **a. Lancement de l'assistant**
+    Naviguez vers **Home**, cliquez sur **Backup Job** > `Windows computer...`.
 
----
+* **b. Configuration**
+    * **Nom :** `Sauvegarde Journalière des Serveurs`.
+    * **Computers :** Ajoutez le groupe de protection `Serveurs Critiques PINEAL` créé précédemment.
+    * **Mode :** `Server`.
+    * **Storage :** Sélectionnez le dépôt `Backup local` comme destination.
+    * **Schedule :** Configurez une exécution automatique quotidienne (par exemple, tous les jours à 22h00).
+    * Cochez `Run the job when I click Finish` pour lancer la première sauvegarde immédiatement.
+
+## 🧪 Test de Restauration de Fichier
+
+Une sauvegarde n'est fiable que si sa restauration est testée et fonctionnelle.
+
+* **a. Simulation de perte de données**
+    1. Créez un fichier `test.txt` sur le bureau du serveur Windows (`par-dc-win01`).
+    2. Lancez manuellement le job de sauvegarde pour inclure ce nouveau fichier.
+    3. Une fois la sauvegarde réussie, supprimez le fichier `test.txt`.
+
+* **b. Processus de restauration**
+    1. Dans la console Veeam, allez dans `Home > Backups > Disk`.
+    2. Faites un clic droit sur la sauvegarde du serveur `par-dc-win01` et choisissez `Restore guest files > Windows`.
+    3. L'explorateur de sauvegarde s'ouvre. Naviguez jusqu'au bureau (`C:\Users\Administrator\Desktop`).
+    4. Retrouvez `test.txt`, faites un clic droit dessus et sélectionnez `Restore > Overwrite`.
+
+Le fichier doit réapparaître sur le bureau, confirmant le bon fonctionnement du processus.
+
+✅ **Une stratégie de sauvegarde et de restauration fonctionnelle est en place pour les VMs critiques.**
