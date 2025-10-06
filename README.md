@@ -1,65 +1,92 @@
-# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
+# LAB : Haute Disponibilité du Routage avec HSRP
 
-Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
+Ce laboratoire est consacré à l'élimination du routeur comme point de défaillance unique (Single Point of Failure) en implémentant une solution de redondance de passerelle. Nous utiliserons pour cela le protocole **HSRP (Hot Standby Router Protocol)** sur deux routeurs Cisco.
 
-L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
+Les étapes clés incluent :
 
-## 🏗️ Structure du Projet
+  * La conception d'une topologie réseau simple dans **Packet Tracer** pour simuler l'environnement.
+  * La configuration d'un **routeur actif** (maître) avec une priorité élevée et l'option de préemption.
+  * La configuration d'un **routeur de secours** (standby) qui prendra le relais en cas de panne.
+  * L'utilisation d'une **passerelle virtuelle** commune pour les clients du réseau.
+  * La validation du bon fonctionnement et la réalisation d'un **test de basculement** (failover).
 
-Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
+## 🎯 Objectif
 
-Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
+L'objectif est de déployer une solution de redondance HSRP pour garantir la continuité du service et l'accès à Internet pour les utilisateurs, même en cas de défaillance du routeur principal.
 
-## 🔬 Arborescence des Laboratoires
+<img width="960" height="454" alt="image" src="https://github.com/user-attachments/assets/80fb7d90-0765-49ba-879c-4734abc3dacc" />
 
-Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
----
+## 🛠️ Prérequis
 
-### 1. 📦 Installation d'un serveur ITSM sur Debian
-* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
-* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
+  * Un outil de simulation réseau comme **Cisco Packet Tracer**.
+  * Les composants nécessaires : 2 routeurs, 1 commutateur, 1 PC client.
 
----
+## 🏗️ Architecture et Planification
 
-### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
-* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
-* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
+### 1\. Topologie
 
----
+L'environnement de test est composé des éléments suivants dans Packet Tracer :
 
-### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
-* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
-* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
+  * **2 Routeurs (modèle 2911) :** `Router1` (Actif) et `Router2` (Standby).
+  * **1 Commutateur (modèle 2960)**.
+  * **1 PC Client :** `PC-Admin`.
 
----
+### 2\. Planification du Projet
 
-### 4. 💾 Stratégie de Sauvegarde avec Veeam
-* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
-* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
+L'implémentation de cette solution a suivi un plan de projet structuré en quatre phases principales : Planification, Implémentation, Validation et Documentation.
+Le projet a été planifié pour démarrer dans 25 jours.
 
----
+## ⚙️ Configuration Technique HSRP
 
-### 5. 🔄 Haute Disponibilité du Routage avec HSRP
-* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
-* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
+### 1\. Configuration du PC Client
 
----
+Le PC est configuré pour utiliser l'**adresse IP virtuelle** comme passerelle par défaut.
 
-### 6. 📊 Supervision d'Infrastructure avec Zabbix
-* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
-* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
+  * **Passerelle par défaut :** `192.168.1.1`
 
----
+### 2\. Configuration du Routeur 1 (Actif)
 
-### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
-* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
-* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+Ce routeur est configuré avec une priorité plus élevée (110) pour être élu routeur actif et l'option `preempt` pour reprendre son rôle dès qu'il est de nouveau disponible.
 
----
+```cisco
+enable
+configure terminal
+interface GigabitEthernet0/0
+ ip address 192.168.1.2 255.255.255.0
+ no shutdown
+ standby 1 ip 192.168.1.1
+ standby 1 priority 110
+ standby 1 preempt
+exit
+```
 
-### 8. 📡 Automatisation de la Veille en Cybersécurité
-* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
-* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+### 3\. Configuration du Routeur 2 (Standby)
 
----
+Ce routeur est configuré avec la priorité par défaut (100) pour rester en mode "standby" tant que le routeur 1 est opérationnel.
+
+```cisco
+enable
+configure terminal
+interface GigabitEthernet0/0
+ ip address 192.168.1.3 255.255.255.0
+ no shutdown
+ standby 1 ip 192.168.1.1
+exit
+```
+
+## 🧪 Vérifications et Test de Basculement
+
+  * **a. Vérification de l'état HSRP**
+    La commande `show standby` est exécutée sur les deux routeurs pour confirmer leurs rôles respectifs : `State is Active` pour Router1 et `State is Standby` for Router2
+
+      * **b. Test de Basculement (Failover)**
+
+    <!-- end list -->
+
+    1.  Un `ping` en continu est lancé depuis le PC client vers l'adresse IP virtuelle (`ping -t 192.168.1.1`).
+    2.  La connexion physique entre le **Router1** et le commutateur est supprimée pour simuler une panne.
+    3.  On observe une interruption minimale du ping (une ou deux pertes de paquets) avant que la connectivité ne soit rétablie.
+    4.  Une nouvelle vérification avec `show standby` sur le **Router2** confirme qu'il est bien passé à l'état `Active`.
+
+    ✅ **La redondance de la passerelle est fonctionnelle, garantissant une haute disponibilité de l'accès réseau.**
