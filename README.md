@@ -1,4 +1,4 @@
-# LAB : Haute Disponibilité du Routage avec HSRP
+# LAB-1/05 : Haute Disponibilité du Routage avec HSRP
 
 Ce laboratoire est consacré à l'élimination du routeur comme point de défaillance unique (Single Point of Failure) en implémentant une solution de redondance de passerelle. Nous utiliserons pour cela le protocole **HSRP (Hot Standby Router Protocol)** sur deux routeurs Cisco.
 
