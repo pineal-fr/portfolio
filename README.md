@@ -1,110 +1,65 @@
-# Hello, I'm Ryad
-<a href="https://linkedin.com/in/ryad-terfous/"><img src="https://img.shields.io/badge/-LinkedIn-0072b1?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
 
-I am a highly driven Secure Infrastructure Administrator (ISO 27001 certified) with hands-on experience across Cloud, DevOps, and Systems & Networks.
-My background includes roles as a DevOps System Administrator and IAM consultant, demonstrating a dual focus on operational efficiency (Kubernetes, CI/CD, IaC) and security compliance.
-I pride myself on my analytical mind, adaptability, and commitment to collaborative problem-solving.
+Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
 
+L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
 
-## Objective
+## 🏗️ Structure du Projet
 
-To leverage my comprehensive expertise in secure infrastructure administration, DevOps automation, aiming for a challenging role that prioritizes both system performance and stringent ISO 27001 compliance and continuous security improvement.
+Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
 
+Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
 
-## Skills
+## 🔬 Arborescence des Laboratoires
 
-| Skill                                         | Associated Project         |
-|-----------------------------------------------|----------------------------|
-| Cybersecurity & Compliance                    | <a href="https://google.com">Detection Lab</a>|
-| Network Traffic Monitoring and Attack Detection | <a href="https://google.com">Detection Lab</a>|
-| Security Automation with Shuffle SOAR         | SOC Automation Lab|
-| Incident Response Planning and Execution      | SOC Automation Lab|
-| DevOps & Containerization                     | SOC Automation Lab|
-| Scripting and Automation for Threat Mitigation | SOC Automation Lab|
+Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
+---
 
-## Tools
+### 1. 📦 Installation d'un serveur ITSM sur Debian
+* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
+* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
 
+---
 
-### Cloud & Collaboration
-<div>
-    <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" /></a>
-    <a href="https://azure.microsoft.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Azure%20Cloud-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" /></a>
-    <a href="https://powerautomate.microsoft.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Power%20Automate-0078D4?style=for-the-badge&logo=microsoftpowerautomate&logoColor=white" /></a>
-    <a href="https://www.microsoft.com/fr-fr/microsoft-365/sharepoint/collaboration" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/SharePoint-0078D4?style=for-the-badge&logo=sharepoint&logoColor=white" /></a>
-</div>
+### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
+* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
+* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
 
-### DevOps & Infrastructure as Code (IaC)
-<div>
-    <a href="https://www.ansible.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Ansible-EE0000?style=for-the-badge&logo=ansible&logoColor=white" /></a>
-    <a href="https://docs.microsoft.com/azure/azure-resource-manager/templates/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/ARM%20Templates-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" /></a>
-    <a href="https://www.checkov.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Checkov-107C10?style=for-the-badge&logoColor=white" /></a>
-    <a href="https://about.gitlab.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/CI%2FCD-FCAE1E?style=for-the-badge&logo=gitlab&logoColor=white" /></a>
-    <a href="https://www.docker.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" /></a>
-    <a href="https://git-scm.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" /></a>
-    <a href="https://www.jenkins.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=jenkins&logoColor=white" /></a>
-    <a href="https://kubernetes.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white" /></a>
-    <a href="https://k8slens.dev/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Lens-5C8DF6?style=for-the-badge&logo=lens&logoColor=white" /></a>
-    <a href="https://www.sonarsource.com/products/sonarqube/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/SonarQube-4E9B2F?style=for-the-badge&logo=sonarqube&logoColor=white" /></a>
-    <a href="https://www.terraform.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Terraform-7B42BC?style=for-the-badge&logo=terraform&logoColor=white" /></a>
-</div>
+---
 
-### Identity & Endpoint Management
-<div>
-    <a href="https://learn.microsoft.com/fr-fr/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Active%20Directory-0078D4?style=for-the-badge&logo=microsoft&logoColor=white" /></a>
-    <a href="https://www.microsoft.com/security/business/identity-access/microsoft-entra-id" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Entra%20ID-0078D4?style=for-the-badge&logo=microsoft&logoColor=white" /></a>
-    <a href="https://www.microsoft.com/security/business/microsoft-intune" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Intune-0078D4?style=for-the-badge&logo=microsoft&logoColor=white" /></a>
-    <a href="https://www.microsoft.com/security/business/endpoint-security/microsoft-defender-endpoint" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Microsoft_Defender_for_Endpoint-00A4EF?&style=for-the-badge&logo=Microsoft&logoColor=white" /></a>
-</div>
+### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
+* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
+* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
 
-### Network & Virtualization
-<div>
-    <a href="https://docs.microsoft.com/virtualization/hyper-v-on-windows/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Hyper--V-0078D4?style=for-the-badge&logo=microsoft&logoColor=white" /></a>
-    <a href="https://www.pfsense.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/pfSense-2196F3?style=for-the-badge&logo=pfsense&logoColor=white" /></a>
-    <a href="https://suricata.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Suricata-EF3B2D?&style=for-the-badge&logo=Suricata&logoColor=white" /></a>
-    <a href="https://www.vmware.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/VMware-607086?style=for-the-badge&logo=vmware&logoColor=white" /></a>
-    <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Wireshark-1679A7?&style=for-the-badge&logo=Wireshark&logoColor=white" /></a>
-</div>
+---
 
-### OS, Audit & Backup
-<div>
-    <a href="https://www.freebsd.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/FreeBSD-AB2B21?style=for-the-badge&logo=freebsd&logoColor=white" /></a>
-    <a href="https://www.linuxfoundation.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" /></a>
-    <a href="https://github.com/silverhack/monkey365" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Monkey365-512DA8?style=for-the-badge&logoColor=white" /></a>
-    <a href="https://www.tenable.com/products/nessus" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Nessus-000000?style=for-the-badge&logo=nessus&logoColor=white" /></a>
-    <a href="https://www.openvas.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/OpenVAS-45B422?style=for-the-badge&logoColor=white" /></a>
-    <a href="https://owasp.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/OWASP-000000?style=for-the-badge&logo=owasp&logoColor=white" /></a>
-    <a href="https://www.veeam.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Veeam-00D61D?style=for-the-badge&logo=veeam&logoColor=black" /></a>
-    <a href="https://www.microsoft.com/windows" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white" /></a>
-</div>
+### 4. 💾 Stratégie de Sauvegarde avec Veeam
+* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
+* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
 
-### SIEM, Monitoring & Logging
-<div>
-    <a href="https://grafana.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white" /></a>
-    <a href="https://azure.microsoft.com/services/microsoft-sentinel/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Microsoft_Sentinel-0078D4?&style=for-the-badge&logo=Microsoft&logoColor=white" /></a>
-    <a href="https://www.nagios.org/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Nagios-FF7900?style=for-the-badge&logo=nagios&logoColor=white" /></a>
-    <a href="https://prometheus.io/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white" /></a>
-    <a href="https://www.splunk.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/-Splunk-000000?&style=for-the-badge&logo=Splunk&logoColor=white" /></a>
-    <a href="https://pandorafms.com/en/it-topics/what-is-syslog-an-introduction-to-the-system-log-protocol/#:~:text=Un%20serveur%20Syslog%20permet%20d,toutes%20les%20informations%20d'enregistrement" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Syslog-4B4B4B?style=for-the-badge&logoColor=white" /></a>
-    <a href="https://wazuh.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Wazuh-000000?style=for-the-badge&logo=wazuh&logoColor=white" /></a>
-    <a href="https://www.zabbix.com/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Zabbix-CC0000?style=for-the-badge&logo=zabbix&logoColor=white" /></a>
-</div>
+---
 
+### 5. 🔄 Haute Disponibilité du Routage avec HSRP
+* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
+* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
 
-## Certifications
-<div>
-    <a href="https://www.credly.com/badges/8a9b5701-6d51-47d0-98c2-754da0da17fc">
-<img src="https://img.shields.io/badge/ISO%2027001-1E90FF?style=for-the-badge&logo=security&logoColor=white" />
-    </a>
-  <a href="https://learn.microsoft.com/en-us/users/ryadterfous/credentials/f1479c9db686f3ad?ref=https%3A%2F%2Fwww.linkedin.com%2F">
-  <img src="https://img.shields.io/badge/Azure-AZ--900-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white" />
-</a>
-    <a href="https://www.ibm.com/think/topics/network-topology#:~:text=Network%20topology%20refers%20to%20the,in%20network%20design%20and%20management">
-    <img src="https://img.shields.io/badge/-Network%2B-007ACC?&style=for-the-badge&logo=CompTIA&logoColor=white" />
-    </a>
-</div>
+---
 
+### 6. 📊 Supervision d'Infrastructure avec Zabbix
+* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
+* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
 
-## Projects
-- [LAMP-GLPI-Secure](https://github.com/pineal-fr/portfolio/tree/LAB-GLPI)
-- SOC Automation Project
+---
+
+### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
+* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
+* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+
+---
+
+### 8. 📡 Automatisation de la Veille en Cybersécurité
+* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
+* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+
+---
