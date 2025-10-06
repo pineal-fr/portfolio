@@ -15,8 +15,8 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 
 | Skill                                         | Associated Project         |
 |-----------------------------------------------|----------------------------|
-| Cybersecurity & Compliance                    | <a href="https://google.com">Detection Lab</a>|
-| Network Traffic Monitoring and Attack Detection | <a href="https://google.com">Detection Lab</a>|
+| Cybersecurity & Compliance                    | <a href="https://github.com/pineal-fr/portfolio/blob/07-Audit-ZAP/README.md">LAN-1 Lab</a>|
+| Backup & Replicatiopn                         | <a href="https://github.com/pineal-fr/portfolio/blob/04-Sauvegarde-Veeam/README.md">LAB-1 Lab</a>|
 | Security Automation with Shuffle SOAR         | SOC Automation Lab|
 | Incident Response Planning and Execution      | SOC Automation Lab|
 | DevOps & Containerization                     | SOC Automation Lab|
@@ -106,5 +106,5 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 
 
 ## Projects
-- [LAMP-GLPI-Secure](https://github.com/pineal-fr/portfolio/tree/LAB-GLPI)
+- [LAB-1](https://github.com/pineal-fr/portfolio/tree/LAB-1)
 - SOC Automation Project
