@@ -106,5 +106,5 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 
 
 ## Projects
-- Detection Lab
+- [LAMP-GLPI-Secure](https://github.com/pineal-fr/portfolio/tree/LAB-GLPI)
 - SOC Automation Project
