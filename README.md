@@ -1,65 +1,94 @@
-# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
+# LAB : Supervision d'Infrastructure avec Zabbix
 
-Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
+Ce laboratoire décrit la mise en place d'une solution de supervision centralisée avec Zabbix. L'objectif est de surveiller en temps réel l'état de santé et les performances des serveurs critiques de l'infrastructure, notamment le contrôleur de domaine Active Directory et le serveur ITSM GLPI.
 
-L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
+Les étapes clés incluent :
 
-## 🏗️ Structure du Projet
+  * La préparation d'une machine virtuelle dédiée sur `Debian 13` pour héberger le serveur Zabbix.
+  * L'installation des composants Zabbix (serveur, frontend, base de données).
+  * Le déploiement des **agents Zabbix** sur les serveurs cibles : un serveur `Windows Server 2022` (Active Directory) et un serveur `Debian 13` (GLPI).
+  * La configuration des hôtes dans l'interface web de Zabbix.
+  * L'association des modèles de supervision (templates) pour commencer la collecte de métriques pertinentes (CPU, RAM, disque, etc.).
 
-Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
+## 🎯 Objectif
 
-Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
+L'objectif est de déployer un serveur de supervision Zabbix fonctionnel, capable de centraliser les alertes et les indicateurs de performance des serveurs clés. Cette mise en place doit permettre un suivi proactif de la disponibilité et de la consommation des ressources de l'Active Directory et de GLPI.
 
-## 🔬 Arborescence des Laboratoires
+<img width="1280" height="644" alt="image" src="https://github.com/user-attachments/assets/df804544-3884-4206-a942-c6ca253f96b8" />
 
-Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
----
+## 🛠️ Prérequis
 
-### 1. 📦 Installation d'un serveur ITSM sur Debian
-* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
-* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
+  * Une machine virtuelle dédiée pour le serveur Zabbix (Debian 13).
+  * Le serveur Active Directory (`par-dc-win01`) du LAB précédent doit être fonctionnel.
+  * Le serveur GLPI (`par-glpi-01`) du LAB précédent doit être fonctionnel.
+  * Une connectivité réseau entre les trois machines.
 
----
+## ⚙️ Étapes d'installation et de configuration
 
-### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
-* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
-* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
+### 1\. Déploiement du Serveur Zabbix
 
----
+Une nouvelle VM Debian 13, nommée `par-zbx-01`, est installée. L'installation de Zabbix Server, Frontend et des dépendances (Apache, MariaDB, PHP) est réalisée en suivant la documentation officielle. L'étape finale de configuration se fait via l'interface web.
 
-### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
-* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
-* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
+### 2\. Installation de l'Agent Zabbix sur Windows Server (`par-dc-01`)
 
----
+L'agent Zabbix est installé sur le contrôleur de domaine pour permettre la collecte de données.
 
-### 4. 💾 Stratégie de Sauvegarde avec Veeam
-* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
-* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
+  * **a. Téléchargement et installation**
+    L'agent MSI pour Windows est téléchargé depuis le [site officiel de Zabbix](https://www.zabbix.com/download_agents) et installé. Durant l'installation, il faut renseigner :
 
----
+      * **Zabbix server IP:** `192.168.1.59`
+      * **Hostname:** `par-dc-win01`
 
-### 5. 🔄 Haute Disponibilité du Routage avec HSRP
-* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
-* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
+  * **b. Configuration du Pare-feu**
+    Il est nécessaire de vérifier que le pare-feu Windows autorise les connexions entrantes sur le port **TCP/10050** pour que le serveur Zabbix puisse communiquer avec l'agent.
 
----
+### 3\. Installation de l'Agent Zabbix sur Debian (`par-glpi-01`)
 
-### 6. 📊 Supervision d'Infrastructure avec Zabbix
-* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
-* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
+  * **a. Installation du paquet**
 
----
+    ```bash
+    sudo apt install zabbix-agent -y
+    ```
 
-### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
-* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
-* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+  * **b. Configuration de l'agent**
+    Le fichier de configuration de l'agent doit être modifié pour pointer vers le serveur Zabbix.
 
----
+    ```bash
+    sudo nano /etc/zabbix/zabbix_agentd.conf
+    ```
 
-### 8. 📡 Automatisation de la Veille en Cybersécurité
-* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
-* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+    Modifiez les lignes suivantes :
 
----
+    ```ini
+    Server=192.168.1.59
+    Hostname=par-glpi-01
+    ```
+
+  * **c. Redémarrage du service**
+
+    ```bash
+    sudo systemctl restart zabbix-agent
+    ```
+
+## 🧪 Configuration et Vérification dans l'Interface Zabbix
+
+Dans l'interface web de Zabbix, les deux serveurs sont ajoutés en tant qu'hôtes pour démarrer la supervision.
+
+  * **a. Ajout de l'hôte Windows (`par-dc-01`)**
+
+      * **Hostname:** `par-dc-01`
+      * **Groups:** `Windows servers`
+      * **Interfaces:** `Agent` avec l'adresse IP `192.168.1.50`
+      * **Templates:** `Windows by Zabbix agent`
+
+  * **b. Ajout de l'hôte Linux (`par-glpi-01`)**
+
+      * **Hostname:** `par-glpi-01`
+      * **Groups:** `Linux servers`
+      * **Interfaces:** `Agent` avec l'adresse IP `192.168.1.22`
+      * **Templates:** `Linux by Zabbix agent`
+
+Une fois les hôtes ajoutés, l'icône "Availability" doit passer au vert, indiquant que la communication est établie et que la collecte de données a commencé.
+
+✅ **Les serveurs critiques sont maintenant supervisés par Zabbix, permettant un suivi proactif de leur état.**
