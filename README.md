@@ -1,4 +1,4 @@
-# LAB : Audit de Vulnérabilités Web avec OWASP ZAP
+# LAB-1/07 : Audit de Vulnérabilités Web avec OWASP ZAP
 
 Ce laboratoire décrit la procédure pour réaliser un audit de sécurité sur une application web, en l'occurrence le serveur GLPI précédemment installé. Nous utiliserons pour cela l'outil OWASP ZAP (ZAPROXY) depuis une machine virtuelle Kali Linux afin d'identifier, d'évaluer et de proposer des solutions aux vulnérabilités découvertes.
 
