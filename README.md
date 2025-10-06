@@ -1,4 +1,4 @@
-# LAB : Supervision d'Infrastructure avec Zabbix
+# LAB-1/06 : Supervision d'Infrastructure avec Zabbix
 
 Ce laboratoire décrit la mise en place d'une solution de supervision centralisée avec Zabbix. L'objectif est de surveiller en temps réel l'état de santé et les performances des serveurs critiques de l'infrastructure, notamment le contrôleur de domaine Active Directory et le serveur ITSM GLPI.
 
