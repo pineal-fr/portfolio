@@ -1,65 +1,80 @@
-# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
+# LAB : Mise en Place d'une Veille en Cybersécurité Automatisée
 
-Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
+Ce laboratoire explique comment construire un système de veille technologique et de sécurité (threat intelligence) proactif et automatisé. La méthode combine plusieurs outils pour centraliser l'information, générer des alertes en temps réel et partager les découvertes pertinentes avec une équipe.
 
-L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
+Les étapes clés incluent :
 
-## 🏗️ Structure du Projet
+* La centralisation des sources d'information via des flux RSS à l'aide d'un agrégateur comme **Feedly**.
+* L'automatisation des alertes pour les informations critiques en créant une règle ("Applet") sur la plateforme **IFTTT** (If This Then That).
+* L'intégration d'un flux RSS directement dans un canal de communication d'équipe, ici **Microsoft Teams**, pour une diffusion large et une collaboration efficace.
 
-Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
+## 🎯 Objectif
 
-Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
+L'objectif est de transformer une veille manuelle et chronophage en un processus automatisé et efficient. Ce système doit permettre de surveiller en continu des sources de confiance, d'être alerté immédiatement sur les menaces les plus critiques (via email) et de partager facilement les actualités importantes avec les collaborateurs concernés.
 
-## 🔬 Arborescence des Laboratoires
+<img width="1024" height="682" alt="image" src="https://github.com/user-attachments/assets/c17a2e16-2a9f-42a3-b155-1cc0439e9c63" />
 
-Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
----
+## 🛠️ Prérequis
 
-### 1. 📦 Installation d'un serveur ITSM sur Debian
-* **Branche :** [`LAB-1/01-Installation-GLPI`](../blob/LAB-1/01-Installation-GLPI/README.md)
-* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
+* Un compte **Feedly** (version gratuite suffisante).
+* Un compte **IFTTT** (version gratuite suffisante).
+* Un accès à **Microsoft Teams** (ou un autre outil collaboratif supportant les connecteurs RSS).
+* Une liste de sources de veille fiables disposant de flux RSS (ex: CERT-FR, ANSSI, The Hacker News, etc.).
 
----
+## ⚙️ Étapes de mise en place
 
-### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
-* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](../blob/LAB-1/02-Segmentation-VLAN-LACP/README.md)
-* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
+### 1. Centralisation des Flux avec Feedly
 
----
+Feedly est utilisé pour agréger tous les articles de nos sources en un seul endroit.
 
-### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
-* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](../blob/LAB-1/03-Active-Directory-DHCP/README.md)
-* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
+* **a. Création d'un dossier de veille**
+    Dans Feedly, créez un nouveau dossier (Feed) nommé `Veille Cyber` pour organiser les sources.
 
----
+* **b. Ajout des sources RSS**
+    Recherchez et ajoutez les sites web ou les URL de flux RSS des sources de confiance.
+    Pour ce lab, mes sources incluent :
+    * `cert.ssi.gouv.fr`
+    * `cnil.fr`
+    * `cybermalveillance.gouv.fr`
+    * `thehackernews.com`
+    * `darkreading.com`
+    * `krebsonsecurity.com`
 
-### 4. 💾 Stratégie de Sauvegarde avec Veeam
-* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](../blob/LAB-1/04-Sauvegarde-Veeam/README.md)
-* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
+### 2. Automatisation des Alertes Critiques avec IFTTT
 
----
+IFTTT va nous permettre de recevoir un email dès qu'une nouvelle alerte est publiée par une source critique comme le CERT-FR.
 
-### 5. 🔄 Haute Disponibilité du Routage avec HSRP
-* **Branche :** [`LAB-1/05-Redondance-HSRP`](../blob/LAB-1/05-Redondance-HSRP/README.md)
-* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
+* **a. Création de l'Applet : Le Déclencheur (If This)**
+    1.  Créez un nouvel Applet et pour le déclencheur "If This", sélectionnez le service **RSS Feed**.
+    2.  Choisissez le trigger `New feed item`.
+    3.  Renseignez l'URL du flux RSS du CERT-FR : `https://www.cert.ssi.gouv.fr/feed/`.
 
----
+* **b. Création de l'Applet : L'Action (Then That)**
+    1.  Pour l'action "Then That", sélectionnez le service **Email** ou **Gmail**.
+    2.  Choisissez l'action `Send an email`.
+    3.  Connectez votre compte email et configurez le destinataire (vous-même ou une liste de distribution d'équipe) ainsi que le contenu de l'email.
 
-### 6. 📊 Supervision d'Infrastructure avec Zabbix
-* **Branche :** [`LAB-1/06-Supervision-Zabbix`](../blob/LAB-1/06-Supervision-Zabbix/README.md)
-* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
+### 3. Intégration Collaborative dans Microsoft Teams
 
----
+Cette étape permet de diffuser la veille à l'ensemble de l'équipe IT.
 
-### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
-* **Branche :** [`LAB-1/07-Audit-ZAP`](../blob/LAB-1/07-Audit-ZAP/README.md)
-* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
+* **a. Création de l'Équipe et du Canal**
+    Dans Microsoft Teams, créez une nouvelle équipe `privée` (ex: `PINEAL`) avec un `canal dédié` à la veille (ex: `VEILLE-EQUIPE IT`).
+    Choisir, `Seuls les propriétaires peuvent publier des messages`.
 
----
+* **b. Configuration du Connecteur RSS**
+    1.  Dans les paramètres du canal, allez dans "Connecteurs" et ajoutez le connecteur **RSS**.
+    2.  Configurez le connecteur :
+        * **Nom :** `CyberVeille`
+        * **Adresse du flux RSS :** `https://www.cert.ssi.gouv.fr/cti/feed/`
+        * **Fréquence :** `Every hour` (Toutes les heures).
 
-### 8. 📡 Automatisation de la Veille en Cybersécurité
-* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](../blob/LAB-1/08-Veille-Cyber-RSS/README.md)
-* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
+## 🧪 Résultat Final
 
----
+Le système est maintenant opérationnel :
+* Le canal Teams **VEILLE-EQUIPE IT** reçoit automatiquement et affiche les nouvelles publications du CERT-FR toutes les heures.
+* Dès qu'une nouvelle publication apparaît sur le flux, l'applet IFTTT se déclenche et envoie une notification par email.
+* Le tableau de bord Feedly offre une vue d'ensemble de toutes les sources pour une consultation plus large.
+
+✅ **Un système de veille cyber automatisé et multi-canal est en place pour une réactivité optimale face aux nouvelles menaces.**
