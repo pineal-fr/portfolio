@@ -15,8 +15,8 @@ To leverage my comprehensive expertise in secure infrastructure administration, 
 
 | Skill                                         | Associated Project         |
 |-----------------------------------------------|----------------------------|
-| Cybersecurity & Compliance                    | <a href="https://github.com/pineal-fr/portfolio/blob/07-Audit-ZAP/README.md">LAN-1 Lab</a>|
-| Backup & Replicatiopn                         | <a href="https://github.com/pineal-fr/portfolio/blob/04-Sauvegarde-Veeam/README.md">LAB-1 Lab</a>|
+| Cybersecurity & Compliance                    | <a href="https://github.com/pineal-fr/portfolio/blob/07-Audit-ZAP/README.md">LAB-1/07 Lab</a>|
+| Backup & Replicatiopn                         | <a href="https://github.com/pineal-fr/portfolio/blob/04-Sauvegarde-Veeam/README.md">LAB-1/04 Lab</a>|
 | Security Automation with Shuffle SOAR         | SOC Automation Lab|
 | Incident Response Planning and Execution      | SOC Automation Lab|
 | DevOps & Containerization                     | SOC Automation Lab|
