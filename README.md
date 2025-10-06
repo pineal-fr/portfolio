@@ -1,4 +1,4 @@
-# LAB : Mise en Place d'une Veille en Cybersécurité Automatisée
+# LAB-1/08 : Mise en Place d'une Veille en Cybersécurité Automatisée
 
 Ce laboratoire explique comment construire un système de veille technologique et de sécurité (threat intelligence) proactif et automatisé. La méthode combine plusieurs outils pour centraliser l'information, générer des alertes en temps réel et partager les découvertes pertinentes avec une équipe.
 
