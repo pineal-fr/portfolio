@@ -1,94 +1,65 @@
-🧪 **LAB-1 : Administration Systèmes, Réseaux et Sécurité**
+# Projet : Déploiement et Sécurisation d'une Infrastructure (LAB-1)
 
-Ce dépôt contient l'infrastructure de mon Laboratoire Technique (LAB-1), conçu pour simuler et valider des architectures réseaux et systèmes sécurisées, en alignement avec mes compétences d'Administrateur Infrastructures Sécurisées et mes certifications ISO 27001.
+Bienvenue dans ce projet qui regroupe une série de laboratoires pratiques (Travaux Pratiques) dédiés à l'administration d'infrastructures sécurisées. Chaque laboratoire est conçu pour démontrer des compétences spécifiques allant de la mise en place de services fondamentaux à la gestion de la cybersécurité.
 
-Chaque section représente une phase critique d'un déploiement d'infrastructure moderne, allant de la mise en place de services fondamentaux (AD, DHCP) à la résilience (HSRP) et à la supervision avancée (Zabbix).
+L'ensemble du projet est organisé de manière chronologique, suivant les étapes de construction et de sécurisation d'une infrastructure d'entreprise simulée.
 
-🎯 **Objectifs & Compétences Clés**
+## 🏗️ Structure du Projet
 
-L'objectif de ce LAB est de démontrer la maîtrise des technologies Systèmes, Réseaux et Cybersécurité nécessaires pour concevoir et maintenir des environnements conformes.
+Ce dépôt est structuré de manière hiérarchique. La branche `main` sert de point d'entrée, et cette branche `LAB-1` sert de base pour tous les laboratoires. Chaque laboratoire est isolé dans sa propre branche, nommée selon la convention `LAB-1/XX-Nom-du-Lab`, pour une clarté et une organisation optimales.
 
--Domaine
+Pour explorer un laboratoire, il suffit de changer de branche en utilisant le sélecteur en haut à gauche de la page, ou de cliquer sur les liens directs dans la liste ci-dessous.
 
--Compétences Validées
+## 🔬 Arborescence des Laboratoires
 
--Sécurité & Conformité
+Voici la liste des laboratoires sous-jacents, présentés dans leur ordre chronologique.
 
--Audit ZAP, Veille Cybersécurité (RSS), ISO 27001, Sécurité des configurations.
+---
 
--Systèmes & Services
+### 1. 📦 Installation d'un serveur ITSM sur Debian
+* **Branche :** [`LAB-1/01-Installation-GLPI`](https://github.com/pineal-fr/portfolio/blob/01-Installation-GLPI/README.md)
+* **Description :** Ce lab couvre le déploiement complet d'un serveur de gestion de parc informatique **GLPI** sur une machine virtuelle **Debian 13**. Il inclut l'installation du système sans interface graphique, la configuration d'une pile **LAMP**, la sécurisation de la base de données et l'installation de l'agent d'inventaire.
 
--Déploiement et administration d'Active Directory (AD), GLPI, DHCP.
+---
 
--Réseaux
+### 2. 🌐 Segmentation et Redondance Réseau avec Cisco
+* **Branche :** [`LAB-1/02-Segmentation-VLAN-LACP`](https://github.com/pineal-fr/portfolio/blob/02-Segmentation-VLAN-LACP/README.md)
+* **Description :** Mise en place d'une architecture réseau segmentée et résiliente sur des commutateurs **Cisco**. Ce lab détaille la création de **VLANs** par service, la synchronisation via **VTP**, la mise en place d'une agrégation de liens **LACP** et la sécurisation de l'administration via **SSH**.
 
--Segmentation VLAN, Agrégation de liens (LACP), Redondance (HSRP).
+---
 
--DevOps & Supervision
+### 3. 🔐 Gestion Centralisée avec Active Directory et DHCP
+* **Branche :** [`LAB-1/03-Active-Directory-DHCP`](https://github.com/pineal-fr/portfolio/blob/03-Active-Directory-DHCP/README.md)
+* **Description :** Déploiement des services d'annuaire **Active Directory (AD DS)** et de distribution d'adresses **DHCP** sur **Windows Server**. Le lab inclut la création d'une forêt, la structuration en Unités d'Organisation (OU) et la configuration des étendues DHCP pour chaque VLAN.
 
--Mise en place de monitoring temps réel (Zabbix), Sauvegarde (Veeam).
+---
 
-🗺️ **Structure du Laboratoire**
+### 4. 💾 Stratégie de Sauvegarde avec Veeam
+* **Branche :** [`LAB-1/04-Sauvegarde-Veeam`](https://github.com/pineal-fr/portfolio/blob/04-Sauvegarde-Veeam/README.md)
+* **Description :** Implémentation d'une solution de sauvegarde et de restauration avec **Veeam Backup & Replication**. Ce lab couvre la configuration d'un dépôt de sauvegarde, la création de jobs, le déploiement d'agents sur Windows et Linux, et la validation par un test de restauration de fichier.
 
-Le projet est organisé selon les étapes logiques de mise en production d'une infrastructure d'entreprise.
+---
 
--Phase
+### 5. 🔄 Haute Disponibilité du Routage avec HSRP
+* **Branche :** [`LAB-1/05-Redondance-HSRP`](https://github.com/pineal-fr/portfolio/blob/05-Redondance-HSRP/README.md)
+* **Description :** Élimination du point de défaillance unique (SPOF) au niveau de la passerelle réseau grâce au protocole **HSRP (Hot Standby Router Protocol)**. Ce lab montre comment configurer deux routeurs pour assurer une redondance active/passive et tester le basculement automatique (failover).
 
--Description
+---
 
--Statut & Livrables
+### 6. 📊 Supervision d'Infrastructure avec Zabbix
+* **Branche :** [`LAB-1/06-Supervision-Zabbix`](https://github.com/pineal-fr/portfolio/blob/06-Supervision-Zabbix/README.md)
+* **Description :** Déploiement d'une solution de monitoring centralisée avec **Zabbix** pour superviser les serveurs critiques (Active Directory et GLPI). Le lab couvre l'installation du serveur Zabbix et le déploiement des agents sur les hôtes Windows et Linux.
 
-**01-Installation-GLPI**
+---
 
-Déploiement et configuration d'un outil de gestion de parc et de tickets (ITSM).
+### 7. 🛡️ Audit de Sécurité Web avec OWASP ZAP
+* **Branche :** [`LAB-1/07-Audit-ZAP`](https://github.com/pineal-fr/portfolio/blob/07-Audit-ZAP/README.md)
+* **Description :** Réalisation d'un audit de vulnérabilités sur l'application web GLPI à l'aide d'**OWASP ZAP** depuis une machine **Kali Linux**. Le lab se conclut par une analyse des failles découvertes et la proposition d'un plan de remédiation.
 
-✅ Complété
+---
 
-**02-Segmentation-VLAN-LACP**
+### 8. 📡 Automatisation de la Veille en Cybersécurité
+* **Branche :** [`LAB-1/08-Veille-Cyber-RSS`](https://github.com/pineal-fr/portfolio/blob/08-Veille-Cyber-RSS/README.md)
+* **Description :** Création d'un système de veille automatisé pour rester informé des dernières menaces. Ce lab combine l'agrégation de flux **RSS** avec **Feedly**, l'automatisation d'alertes par email avec **IFTTT** et l'intégration dans un canal **Microsoft Teams**.
 
-Mise en place d'une architecture réseau sécurisée avec segmentation via VLAN et optimisation du débit/résilience via LACP.
-
-✅ Complété
-
-**03-Active-Directory-DHCP**
-
-Installation et configuration des services d'identité (AD) et d'attribution d'adresses (DHCP) pour la gestion centralisée des utilisateurs.
-
-✅ Complété
-
-**04-Sauvegarde-Veeam**
-
-Implémentation d'une stratégie de sauvegarde et de restauration des données critiques de l'infrastructure via Veeam.
-
-✅ Complété
-
-**05-Redondance-HSRP**
-
-Configuration du protocole HSRP (Hot Standby Router Protocol) pour assurer la haute disponibilité de la passerelle réseau.
-
-✅ Complété
-
-**06-Supervision-Zabbix**
-
-Déploiement de Zabbix pour le monitoring proactif des services (alertes, métriques, tableaux de bord).
-
-✅ Complété
-
-**07-Audit-ZAP**
-
-Réalisation d'audits de sécurité sur les applications web du LAB à l'aide de l'outil OWASP ZAP.
-
-✅ Complété
-
-**08-Veille-Cyber-RSS**
-
-Mise en place de flux RSS dédiés à la veille en cybersécurité, alimentant un tableau de bord de veille stratégique.
-
-✅ Complété
-
-⚙️ **Démarrer ou Contribuer**
-Ce dépôt est le point de référence pour les configurations et les scripts de ce laboratoire.
-
-Exploration : Naviguez dans les dossiers 01-GLPI/, 03-AD-DHCP/, etc., pour consulter les fichiers de configuration, les schémas réseaux et les documentations de mise en œuvre.
-
-Pour toute question ou demande de détail sur les méthodologies utilisées, veuillez me contacter via LinkedIn.
+---
